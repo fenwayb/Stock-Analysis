@@ -4,18 +4,14 @@
 
   # Overview
   
-  ### Purpose
+  ### Purpose and Background
   
-  <p></p>
-
-  ### Background
-  
-  <p></p>
+  <p>In this project we used Visual Basic for Applications, or VBA to analyze stocks of green energy companies for our friend Steve who wants to help his parents find the best stocks to invest in. We made the program easy for someone not experienced with VBA to run with a button that will run our code. The analysis here will be about refactoring that code to see if we can make it run faster</p>
   
   # Analysis
   <p>
   
-  text before
+  Based on the following screenshots our code refactor was a massive success. It decreased the runtime of the code for both the 2017 and 2018 datasets by nearly ten-fold. While these data sets are small enough that the difference in speed does not make a huge difference as the datasets get larger it becomes drastically more important for it to run fast
     
   ![VBA_Old_2017](https://user-images.githubusercontent.com/106105597/176469561-78469bd4-d85c-406b-a159-c8fe0e27376b.png)
    #### original code 2017
@@ -38,9 +34,10 @@
   
   ### Why Refactor?
    
-  <p></p> 
+  <p>The reason to refactor code is to potentially find a way to more optimized - either to make it run faster or potentially use less memory. This is common because there are many different ways you can accomplish the same goal in code and so there often might be a faster way than the first way you tried</p> 
   
   ### Why did this refactor work?
+  The key to this refactor making the code run faster is that we un-nested the loops from the original code. In the first code block, we were using three variables, and at the beginning of every loop through the spreadsheet we were reinitializing those variables back to 0 so they can be used again. In the refactored code however, we turned those 3 variables in to 36 variables, 1 copy of each variable for each ticker, and this allows us to run through the spreadsheet all at once without having to overwrite any of the variables back to 0. After doing a bit of research on the topic it seems that one of the operations that takes the most amount of time in VBA is writing to a spreadsheet. So even though we are using signficantly more variables (and therefore more memory) in the refactored code, it will run much faster because it only needs to write our data to the spreadsheet once at the very end instead of having to do it at the end of each loop
   ```
   For i = 0 To 11
     
